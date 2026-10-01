@@ -50,6 +50,7 @@
 
 [push]
   default = simple
+  autoSetupRemote = true
 
 [branch "master"]
   mergeoptions = --no-edit
@@ -62,3 +63,9 @@
 [user]
 	email = bunkichi.kun@gmail.com
 	name = Benoit Libeau
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
