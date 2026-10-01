@@ -7,6 +7,12 @@ ZSH_THEME="robbyrussell"
 plugins=(git gitfast last-working-dir common-aliases zsh-syntax-highlighting history-substring-search ssh-agent direnv)
 
 
+# Add the omz ssh-agent plugin for WSL / Linux only (macOS handles this through Keychain in ~/.ssh/config)
+case "$(uname -s)" in
+  Darwin) ;;
+  Linux)  plugins+=('ssh-agent') ;;
+esac
+
 # (macOS-only) Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/docs/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
 
@@ -24,8 +30,9 @@ type -a rbenv > /dev/null && eval "$(rbenv init -)"
 
 #source ~/.zprofile
 # Load pyenv (to manage your Python versions)
-#export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-#type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init - 2> /dev/null)" && RPROMPT+='[🐍 $(pyenv version-name)]'
+# Uncomment the next lines if you still run a pyenv based setup
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+# type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init - 2> /dev/null)" && RPROMPT+='[🐍 $(pyenv version-name)]'
 
 # Load nvm (to manage your node versions)
 export NVM_DIR="$HOME/.nvm"
